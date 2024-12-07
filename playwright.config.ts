@@ -2,6 +2,7 @@ import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   testDir: './tests/e2e',
+  testMatch: ['**/*.spec.ts'],
   timeout: 30000,
   retries: process.env.CI ? 2 : 0,
   use: {
