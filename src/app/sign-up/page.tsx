@@ -38,6 +38,7 @@ export default function SignUpPage() {
           unsafeMetadata={{
             role: "user",
           }}
+          signUpMode="oauth_and_password"
         />
       </div>
     </div>
