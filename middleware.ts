@@ -18,8 +18,10 @@ export default authMiddleware({
   ignoredRoutes: [
     "/api/webhook/stripe",
     "/api/webhook/clerk",
+    "/((?!.*\\..*|_next).*)",
     "/(api|trpc)(.*)",
   ],
+  debug: process.env.NODE_ENV === 'development',
 });
 
 export const config = {

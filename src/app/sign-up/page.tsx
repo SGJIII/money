@@ -16,8 +16,13 @@ export default function SignUpPage() {
             card: "bg-background shadow-none",
             formButtonPrimary: "bg-primary hover:bg-primary/90",
           },
+          layout: {
+            socialButtonsPlacement: "bottom",
+            socialButtonsVariant: "blockButton",
+          },
         }}
-        redirectUrl="/dashboard"
+        signInUrl="/sign-in"
+        afterSignInUrl="/dashboard"
         afterSignUpUrl="/dashboard"
       />
     </div>
