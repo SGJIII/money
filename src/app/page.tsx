@@ -4,6 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
+interface PlanTier {
+  name: string;
+  id: string;
+  price: string;
+  features: string[];
+  cta: string;
+  href?: string;
+  mostPopular?: boolean;
+}
+
 export default function Home() {
   const router = useRouter();
 
@@ -29,6 +39,50 @@ export default function Home() {
       console.error("Error:", error);
     }
   };
+
+  const plans: PlanTier[] = [
+    {
+      name: "Free",
+      id: "free",
+      price: "$0",
+      features: [
+        "5 AI generations/month",
+        "Basic templates",
+        "24h support",
+        "1 user",
+      ],
+      cta: "Start Free",
+      href: "/signup",
+    },
+    {
+      name: "Pro",
+      id: "pro",
+      price: "$29",
+      features: [
+        "100 AI generations/month",
+        "All templates",
+        "Social scheduling",
+        "Priority support",
+        "Analytics dashboard",
+      ],
+      cta: "Get Started",
+      mostPopular: true,
+    },
+    {
+      name: "Business",
+      id: "business",
+      price: "$99",
+      features: [
+        "Unlimited generations",
+        "Custom templates",
+        "Advanced analytics",
+        "Dedicated support",
+        "API access",
+        "Team collaboration",
+      ],
+      cta: "Contact Sales",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -188,49 +242,7 @@ export default function Home() {
             </p>
           </div>
           <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {[
-              {
-                name: "Free",
-                id: "free",
-                price: "$0",
-                features: [
-                  "5 AI generations/month",
-                  "Basic templates",
-                  "24h support",
-                  "1 user",
-                ],
-                cta: "Start Free",
-                href: "/signup",
-              },
-              {
-                name: "Pro",
-                id: "pro",
-                price: "$29",
-                features: [
-                  "100 AI generations/month",
-                  "All templates",
-                  "Social scheduling",
-                  "Priority support",
-                  "Analytics dashboard",
-                ],
-                cta: "Get Started",
-                mostPopular: true,
-              },
-              {
-                name: "Business",
-                id: "business",
-                price: "$99",
-                features: [
-                  "Unlimited generations",
-                  "Custom templates",
-                  "Advanced analytics",
-                  "Dedicated support",
-                  "API access",
-                  "Team collaboration",
-                ],
-                cta: "Contact Sales",
-              },
-            ].map((tier) => (
+            {plans.map((tier) => (
               <div
                 key={tier.id}
                 className={`rounded-3xl p-8 ring-1 ring-gray-200 ${
@@ -254,7 +266,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                {tier.id === "free" ? (
+                {tier.id === "free" && tier.href ? (
                   <Link
                     href={tier.href}
                     className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
