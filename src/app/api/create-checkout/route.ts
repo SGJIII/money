@@ -9,12 +9,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const PLANS = {
   pro: {
     name: "Pro Plan",
-    price: "price_1QTTh7GRPozAvrQuGjJAqvwH2TAXXuPWvhYaXBGjr0dMPPeVfr8dEKqQaiQ4t07HbaYarCswdijzHOfpSLb3TIAB00eOVmzlnO",
+    price: "price_1QTTpoGRPozAvrQuGrx6GlUS",
     credits: 100,
   },
   business: {
     name: "Business Plan",
-    price: "price_1QTTh7GRPozAvrQuV3rQdmHCLDe8j45ptVNu4Xb8zmyxhVj2JL78ziFsu0i9nHR8u8e3vOxEM5t8DWGee6yw8Qbq00yTOTGOpV",
+    price: "price_1QTTqCGRPozAvrQulBFHOwkf",
     credits: -1, // unlimited
   },
 };
