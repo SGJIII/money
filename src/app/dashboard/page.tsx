@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { UserButton } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
+import { auth } from "@clerk/nextjs";
 
 export default function Dashboard() {
   const [contentType, setContentType] = useState("Social Media Post");
