@@ -31,8 +31,8 @@ export default function SignUpPage() {
           signInUrl="/sign-in"
           redirectUrl="/dashboard"
           afterSignUpUrl="/dashboard"
+          afterSignInUrl="/dashboard"
         />
-        <div id="clerk-captcha" className="mt-4" />
       </div>
     </div>
   );

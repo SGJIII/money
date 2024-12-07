@@ -24,6 +24,16 @@ export default authMiddleware({
     "/(api|trpc)(.*)",
   ],
   debug: process.env.NODE_ENV === 'development',
+  // Add bot protection settings
+  protectedRoutes: {
+    signIn: true,
+    signUp: true,
+  },
+  botProtection: {
+    enabled: true,
+    signUp: true,
+    signIn: true,
+  },
 });
 
 export const config = {
