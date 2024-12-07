@@ -14,16 +14,11 @@ export default function SignUpPage() {
           elements: {
             rootBox: "mx-auto w-full max-w-[440px]",
             card: "bg-background shadow-none",
+            formButtonPrimary: "bg-primary hover:bg-primary/90",
           },
         }}
-        path="/sign-up"
-        routing="path"
-        signInUrl="/sign-in"
         redirectUrl="/dashboard"
         afterSignUpUrl="/dashboard"
-        hCaptchaConfig={{
-          siteKey: process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY,
-        }}
       />
     </div>
   );

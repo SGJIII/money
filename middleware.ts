@@ -4,8 +4,8 @@ export default authMiddleware({
   // Public routes that don't require authentication
   publicRoutes: [
     "/",
-    "/sign-up",
     "/sign-in",
+    "/sign-up",
     "/pricing",
     "/api/webhook/stripe",
     "/api/webhook/clerk",
@@ -14,6 +14,11 @@ export default authMiddleware({
     "/contact",
     "/terms",
     "/privacy",
+  ],
+  ignoredRoutes: [
+    "/api/webhook/stripe",
+    "/api/webhook/clerk",
+    "/(api|trpc)(.*)",
   ],
 });
 
