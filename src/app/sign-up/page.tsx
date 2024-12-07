@@ -15,14 +15,20 @@ export default function SignUpPage() {
             rootBox: "mx-auto w-full max-w-[440px]",
             card: "bg-background shadow-none",
             formButtonPrimary: "bg-primary hover:bg-primary/90",
+            socialButtonsIconButton: "hover:bg-primary/90",
+            footerActionLink: "hover:text-primary",
           },
           layout: {
-            socialButtonsPlacement: "bottom",
-            socialButtonsVariant: "blockButton",
+            socialButtonsPlacement: "top",
+            socialButtonsVariant: "iconButton",
+            privacyPageUrl: "/privacy",
+            termsPageUrl: "/terms",
           },
         }}
+        path="/sign-up"
+        routing="path"
         signInUrl="/sign-in"
-        afterSignInUrl="/dashboard"
+        redirectUrl="/dashboard"
         afterSignUpUrl="/dashboard"
       />
     </div>

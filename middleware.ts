@@ -6,6 +6,8 @@ export default authMiddleware({
     "/",
     "/sign-in",
     "/sign-up",
+    "/sign-up/sso-callback",
+    "/sign-up/oauth-error",
     "/pricing",
     "/api/webhook/stripe",
     "/api/webhook/clerk",
@@ -25,5 +27,10 @@ export default authMiddleware({
 });
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!.+\\.[\\w]+$|_next).*)",
+    "/",
+    "/(api|trpc)(.*)",
+    "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)",
+  ],
 }; 
