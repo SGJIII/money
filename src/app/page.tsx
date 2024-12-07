@@ -85,17 +85,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-md fixed w-full z-10">
+      {/* Navigation - Enhanced with blur effect and shadow */}
+      <nav className="border-b bg-white/80 backdrop-blur-md fixed w-full z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <span className="text-2xl font-bold text-indigo-600">QuickWrite</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">QuickWrite</span>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/login" className="text-gray-600 hover:text-gray-900">Login</Link>
+            <div className="flex items-center space-x-6">
+              <Link href="/login" className="text-gray-600 hover:text-gray-900 transition-colors">Login</Link>
               <Link href="/signup" 
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-md">
                 Start Free
               </Link>
             </div>
@@ -103,36 +103,44 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <div className="relative isolate pt-14 dark:bg-gray-900">
+      {/* Hero Section - Enhanced with animated gradient and floating elements */}
+      <div className="relative isolate pt-14">
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
+          <div 
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem] animate-pulse"
+            style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}
+          ></div>
         </div>
         
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Create Amazing Content<br/>
-              <span className="text-indigo-600">10x Faster with AI</span>
+          <div className="mx-auto max-w-2xl text-center relative">
+            {/* Floating shapes for visual interest */}
+            <div className="absolute -top-10 -left-10 w-20 h-20 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute -top-10 -right-10 w-20 h-20 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-10 left-10 w-20 h-20 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+
+            <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-7xl mb-8">
+              Create Amazing Content
+              <span className="block mt-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">10x Faster with AI</span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-xl leading-8 text-gray-600">
               Generate engaging social media posts, blog articles, and marketing copy in seconds.
               Perfect for content creators, marketers, and businesses.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link href="/signup"
-                className="rounded-md bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow hover:bg-indigo-500">
+                className="rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-90 transition-all duration-200 hover:shadow-xl">
                 Try for Free
               </Link>
-              <a href="#features" className="text-lg font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
+              <a href="#features" className="text-lg font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors">
+                Learn more <span aria-hidden="true" className="group-hover:translate-x-2 transition-transform">→</span>
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Features Section - Enhanced with better cards and hover effects */}
       <div id="features" className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
@@ -175,9 +183,12 @@ export default function Home() {
                   ),
                 },
               ].map((feature) => (
-                <div key={feature.name} className="flex flex-col">
-                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                    {feature.icon}
+                <div key={feature.name} 
+                  className="group relative flex flex-col bg-white p-8 rounded-2xl shadow-sm ring-1 ring-gray-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                  <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-gray-900">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 group-hover:bg-indigo-500 transition-colors">
+                      <div className="text-white">{feature.icon}</div>
+                    </div>
                     {feature.name}
                   </dt>
                   <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
@@ -190,7 +201,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Testimonials */}
+      {/* Testimonials - Enhanced with better cards and hover effects */}
       <div className="bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-xl text-center">
@@ -206,24 +217,31 @@ export default function Home() {
                   name: 'Sarah Johnson',
                   role: 'Social Media Manager',
                   text: 'QuickWrite has revolutionized our content creation process. What used to take hours now takes minutes.',
+                  avatar: '👩‍💼',
                 },
                 {
                   name: 'Michael Chen',
                   role: 'Marketing Director',
                   text: 'The quality of content is consistently high, and the AI really understands our brand voice.',
+                  avatar: '👨‍💼',
                 },
                 {
                   name: 'Emma Davis',
                   role: 'Content Creator',
                   text: 'This tool has helped me scale my content creation business. My clients are amazed by the results.',
+                  avatar: '👩‍💻',
                 },
               ].map((testimonial) => (
-                <div key={testimonial.name} className="rounded-2xl bg-white p-8 shadow-lg">
-                  <blockquote className="text-gray-600">"{testimonial.text}"</blockquote>
-                  <div className="mt-6">
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                <div key={testimonial.name} 
+                  className="group relative rounded-2xl bg-white p-8 shadow-sm ring-1 ring-gray-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                  <div className="flex items-center gap-x-4 mb-6">
+                    <div className="text-3xl">{testimonial.avatar}</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                      <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    </div>
                   </div>
+                  <blockquote className="text-gray-600 italic">"{testimonial.text}"</blockquote>
                 </div>
               ))}
             </div>
@@ -231,7 +249,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Pricing Section */}
+      {/* Pricing Section - Enhanced with better visual hierarchy */}
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
@@ -244,12 +262,19 @@ export default function Home() {
             {plans.map((tier) => (
               <div
                 key={tier.id}
-                className={`rounded-3xl p-8 ring-1 ring-gray-200 ${
+                className={`relative rounded-3xl p-8 ring-1 ${
                   tier.mostPopular
-                    ? 'bg-gray-900 text-white ring-gray-900'
-                    : 'bg-white text-gray-900'
-                }`}
+                    ? 'bg-gradient-to-b from-gray-900 to-gray-800 text-white ring-gray-900 scale-105 shadow-xl'
+                    : 'bg-white text-gray-900 ring-gray-200 hover:shadow-lg'
+                } transition-all duration-200 hover:-translate-y-1`}
               >
+                {tier.mostPopular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center rounded-full bg-indigo-600 px-4 py-1 text-xs font-medium text-white ring-1 ring-inset ring-indigo-600">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
                 <h3 className="text-lg font-semibold leading-8">{tier.name}</h3>
                 <p className="mt-4 text-5xl font-bold tracking-tight">{tier.price}</p>
                 <p className={`mt-6 text-base leading-7 ${tier.mostPopular ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -268,22 +293,22 @@ export default function Home() {
                 {tier.id === "free" && tier.href ? (
                   <Link
                     href={tier.href}
-                    className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                    className={`mt-8 block rounded-lg px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
                       tier.mostPopular
                         ? 'bg-white text-gray-900 hover:bg-gray-100 focus-visible:outline-white'
-                        : 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600'
-                    }`}
+                        : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 focus-visible:outline-indigo-600'
+                    } transition-all duration-200`}
                   >
                     {tier.cta}
                   </Link>
                 ) : (
                   <button
                     onClick={() => handlePricing(tier.id)}
-                    className={`mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                    className={`mt-8 block w-full rounded-lg px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
                       tier.mostPopular
                         ? 'bg-white text-gray-900 hover:bg-gray-100 focus-visible:outline-white'
-                        : 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600'
-                    }`}
+                        : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 focus-visible:outline-indigo-600'
+                    } transition-all duration-200`}
                   >
                     {tier.cta}
                   </button>
@@ -294,7 +319,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - Enhanced with better interaction */}
       <div className="bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
@@ -320,8 +345,8 @@ export default function Home() {
                   answer: "Yes, Pro and Business plans include social media scheduling features to help you plan and automate your content distribution.",
                 },
               ].map((faq) => (
-                <div key={faq.question} className="pt-6">
-                  <dt className="text-lg font-semibold leading-7 text-gray-900">
+                <div key={faq.question} className="pt-6 group">
+                  <dt className="text-lg font-semibold leading-7 text-gray-900 group-hover:text-indigo-600 transition-colors cursor-pointer">
                     {faq.question}
                   </dt>
                   <dd className="mt-2 text-base leading-7 text-gray-600">
@@ -334,14 +359,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer - Enhanced with better spacing and hover effects */}
       <footer className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
           <div className="flex justify-center space-x-6 md:order-2">
-            <Link href="/privacy" className="text-gray-400 hover:text-gray-500">
+            <Link href="/privacy" className="text-gray-400 hover:text-gray-900 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-gray-500">
+            <Link href="/terms" className="text-gray-400 hover:text-gray-900 transition-colors">
               Terms of Service
             </Link>
           </div>
@@ -352,6 +377,17 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating CTA Button */}
+      <div className="fixed bottom-8 right-8 z-50">
+        <Link href="/signup"
+          className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-200">
+          <span>Get Started</span>
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Link>
+      </div>
     </div>
   )
 }
