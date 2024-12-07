@@ -1,4 +1,5 @@
 import { authMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export default authMiddleware({
   // Public routes that don't require authentication
@@ -25,17 +26,16 @@ export default authMiddleware({
   ],
   debug: process.env.NODE_ENV === 'development',
   // Bot protection settings
-  protectedRoutes: {
-    signIn: true,
-    signUp: true,
+  beforeAuth: (req) => {
+    // Add bot protection for auth routes
+    const isAuthRoute = ['/sign-in', '/sign-up'].some(route => 
+      req.nextUrl.pathname.startsWith(route)
+    );
+    if (isAuthRoute) {
+      return NextResponse.next(); // Continue with bot protection
+    }
+    return false; // Skip bot protection for non-auth routes
   },
-  // OAuth settings
-  signInUrl: "/sign-in",
-  signUpUrl: "/sign-up",
-  afterSignInUrl: "/dashboard",
-  afterSignUpUrl: "/dashboard",
-  // Additional security settings
-  apiRoutes: ["/api(.*)"],
   publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 });
 
@@ -46,4 +46,4 @@ export const config = {
     "/(api|trpc)(.*)",
     "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)",
   ],
-}; 
+};
