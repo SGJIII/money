@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { Navbar } from "@/components/layout/navbar";
 import "./globals.css";
 
 export const metadata = {
@@ -13,8 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>{children}</body>
+      <html lang="en" className="h-full">
+        <body className="h-full">
+          <Navbar />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
+        </body>
       </html>
     </ClerkProvider>
   );
