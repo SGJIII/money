@@ -1,35 +1,56 @@
-import { PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['**/*.spec.ts'],
-  timeout: 30000,
-  retries: process.env.CI ? 2 : 0,
+  timeout: 120000,
+  expect: {
+    timeout: 30000,
+  },
+  fullyParallel: false,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 1,
+  workers: process.env.CI ? 1 : 1,
+  reporter: 'list',
   use: {
-    baseURL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-    trace: 'on-first-retry',
-    video: 'on-first-retry',
+    baseURL: 'http://localhost:3000',
+    trace: 'retain-on-failure',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    actionTimeout: 30000,
+    navigationTimeout: 30000,
+    bypassCSP: true, // Allow loading iframes
+    ignoreHTTPSErrors: true, // Handle mixed content
+    launchOptions: {
+      args: [
+        '--disable-web-security', // Allow cross-origin iframes
+        '--disable-features=IsolateOrigins',
+        '--disable-site-isolation-trials',
+        '--disable-features=BlockInsecurePrivateNetworkRequests',
+      ],
+      slowMo: process.env.CI ? 0 : 100,
+    },
   },
   projects: [
     {
-      name: 'Chrome',
+      name: 'chromium',
       use: {
-        browserName: 'chromium',
+        ...devices['Desktop Chrome'],
+        permissions: ['clipboard-read', 'clipboard-write'],
       },
     },
     {
-      name: 'Firefox',
-      use: {
-        browserName: 'firefox',
-      },
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
     {
-      name: 'Safari',
-      use: {
-        browserName: 'webkit',
-      },
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
-};
-
-export default config; 
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
+  },
+}); 

@@ -1,0 +1,1 @@
+{"plan":"pro","successUrl":"http://localhost:3000/dashboard?success=true","cancelUrl":"http://localhost:3000/pricing?canceled=true"}
