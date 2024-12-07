@@ -1,7 +1,35 @@
+"use client";
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter();
+
+  const handlePricing = async (planId: string) => {
+    try {
+      const response = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          plan: planId,
+          successUrl: `${window.location.origin}/dashboard?success=true`,
+          cancelUrl: `${window.location.origin}/pricing?canceled=true`,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -172,6 +200,7 @@ export default function Home() {
                   "1 user",
                 ],
                 cta: "Start Free",
+                href: "/signup",
               },
               {
                 name: "Pro",
@@ -225,16 +254,29 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/signup"
-                  className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                    tier.mostPopular
-                      ? 'bg-white text-gray-900 hover:bg-gray-100 focus-visible:outline-white'
-                      : 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600'
-                  }`}
-                >
-                  {tier.cta}
-                </Link>
+                {tier.id === "free" ? (
+                  <Link
+                    href={tier.href}
+                    className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                      tier.mostPopular
+                        ? 'bg-white text-gray-900 hover:bg-gray-100 focus-visible:outline-white'
+                        : 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600'
+                    }`}
+                  >
+                    {tier.cta}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handlePricing(tier.id)}
+                    className={`mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                      tier.mostPopular
+                        ? 'bg-white text-gray-900 hover:bg-gray-100 focus-visible:outline-white'
+                        : 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600'
+                    }`}
+                  >
+                    {tier.cta}
+                  </button>
+                )}
               </div>
             ))}
           </div>
