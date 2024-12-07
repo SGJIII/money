@@ -101,13 +101,13 @@ export function Navbar() {
             ) : (
               <>
                 <Link
-                  href="/login"
+                  href="/sign-in"
                   className="text-gray-600 hover:text-gray-900"
                 >
-                  Login
+                  Sign In
                 </Link>
                 <Link
-                  href="/signup"
+                  href="/sign-up"
                   className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
                 >
                   Start Free
