@@ -1,6 +1,9 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { Navbar } from "@/components/layout/navbar";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "QuickWrite - AI Content Generation Made Simple",
@@ -14,12 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className="h-full">
-        <body className="h-full">
-          <Navbar />
-          <main className="min-h-screen pt-16">
-            {children}
-          </main>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.className} min-h-screen bg-background antialiased`}>
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+          </div>
         </body>
       </html>
     </ClerkProvider>
