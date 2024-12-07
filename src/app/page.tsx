@@ -94,7 +94,7 @@ export default function Home() {
             </div>
             <div className="flex items-center space-x-6">
               <Link href="/login" className="text-gray-600 hover:text-gray-900 transition-colors">Login</Link>
-              <Link href="/signup" 
+              <Link href="/sign-up" 
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-md">
                 Start Free
               </Link>
@@ -128,7 +128,7 @@ export default function Home() {
               Perfect for content creators, marketers, and businesses.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link href="/signup"
+              <Link href="/sign-up"
                 className="rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-90 transition-all duration-200 hover:shadow-xl">
                 Try for Free
               </Link>
@@ -380,7 +380,7 @@ export default function Home() {
 
       {/* Floating CTA Button */}
       <div className="fixed bottom-8 right-8 z-50">
-        <Link href="/signup"
+        <Link href="/sign-up"
           className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-200">
           <span>Get Started</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">

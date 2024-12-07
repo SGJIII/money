@@ -32,6 +32,7 @@ export default function SignUpPage() {
           redirectUrl="/dashboard"
           afterSignUpUrl="/dashboard"
           afterSignInUrl="/dashboard"
+          continueSignUpUrl="/sign-up/continue"
         />
       </div>
     </div>
