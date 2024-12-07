@@ -18,12 +18,14 @@ export default function SignUpPage() {
               formButtonPrimary: "bg-primary hover:bg-primary/90",
               socialButtonsIconButton: "hover:bg-primary/90",
               footerActionLink: "hover:text-primary",
+              oauthButtonsIconButton: "hover:bg-primary/90",
             },
             layout: {
               socialButtonsPlacement: "top",
               socialButtonsVariant: "iconButton",
               privacyPageUrl: "/privacy",
               termsPageUrl: "/terms",
+              shimmer: true,
             },
           }}
           path="/sign-up"
@@ -33,6 +35,9 @@ export default function SignUpPage() {
           afterSignUpUrl="/dashboard"
           afterSignInUrl="/dashboard"
           continueSignUpUrl="/sign-up/continue"
+          unsafeMetadata={{
+            role: "user",
+          }}
         />
       </div>
     </div>

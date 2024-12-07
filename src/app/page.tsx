@@ -51,7 +51,7 @@ export default function Home() {
         "1 user",
       ],
       cta: "Start Free",
-      href: "/signup",
+      href: "/sign-up",
     },
     {
       name: "Pro",

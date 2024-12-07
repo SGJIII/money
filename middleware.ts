@@ -34,6 +34,9 @@ export default authMiddleware({
   signUpUrl: "/sign-up",
   afterSignInUrl: "/dashboard",
   afterSignUpUrl: "/dashboard",
+  // Additional security settings
+  apiRoutes: ["/api(.*)"],
+  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 });
 
 export const config = {
