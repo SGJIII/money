@@ -24,19 +24,14 @@ export default authMiddleware({
     "/((?!.*\\..*|_next).*)",
     "/(api|trpc)(.*)",
   ],
-  debug: process.env.NODE_ENV === 'development',
+  debug: true,
   // Bot protection settings
   beforeAuth: (req) => {
-    // Add bot protection for auth routes
-    const isAuthRoute = ['/sign-in', '/sign-up'].some(route => 
-      req.nextUrl.pathname.startsWith(route)
-    );
-    if (isAuthRoute) {
-      return NextResponse.next(); // Continue with bot protection
-    }
-    return false; // Skip bot protection for non-auth routes
+    return NextResponse.next();
   },
   publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  domain: "quickwrite.clerk.accounts.dev",
+  isSatellite: false
 });
 
 export const config = {

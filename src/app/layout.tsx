@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider frontendApi="quickwrite.clerk.accounts.dev">
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={`${inter.className} min-h-screen bg-background antialiased`}>
           <div className="relative flex min-h-screen flex-col">
