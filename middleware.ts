@@ -2,13 +2,10 @@ import { authMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export default authMiddleware({
-  // Public routes that don't require authentication
   publicRoutes: [
     "/",
-    "/sign-in",
-    "/sign-up",
-    "/sign-up/sso-callback",
-    "/sign-up/oauth-error",
+    "/sign-in(.*)",
+    "/sign-up(.*)",
     "/pricing",
     "/api/webhook/stripe",
     "/api/webhook/clerk",
@@ -23,7 +20,6 @@ export default authMiddleware({
     "/api/webhook/clerk",
   ],
   debug: true,
-  // Bot protection settings
   beforeAuth: (req) => {
     return NextResponse.next();
   },
@@ -31,5 +27,5 @@ export default authMiddleware({
 });
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next|_static|favicon.ico).*)", "/"],
+  matcher: ["/((?!.*\\..*|_next).*)", "/"],
 };
