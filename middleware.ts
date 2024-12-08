@@ -18,14 +18,18 @@ export default authMiddleware({
   ignoredRoutes: [
     "/api/webhook/stripe",
     "/api/webhook/clerk",
+    "/_next(.*)",
+    "/favicon.ico",
+    "/api/trpc(.*)",
   ],
   debug: true,
   beforeAuth: (req) => {
     return NextResponse.next();
-  },
-  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  }
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
 };
