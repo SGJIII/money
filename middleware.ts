@@ -21,24 +21,15 @@ export default authMiddleware({
   ignoredRoutes: [
     "/api/webhook/stripe",
     "/api/webhook/clerk",
-    "/((?!.*\\..*|_next).*)",
-    "/(api|trpc)(.*)",
   ],
   debug: true,
   // Bot protection settings
   beforeAuth: (req) => {
     return NextResponse.next();
   },
-  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-  domain: "quickwrite.clerk.accounts.dev",
-  isSatellite: false
+  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 });
 
 export const config = {
-  matcher: [
-    "/((?!.+\\.[\\w]+$|_next).*)",
-    "/",
-    "/(api|trpc)(.*)",
-    "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)",
-  ],
+  matcher: ["/((?!.+\\.[\\w]+$|_next|_static|favicon.ico).*)", "/"],
 };

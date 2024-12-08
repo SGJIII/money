@@ -16,7 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: undefined,
+        variables: { colorPrimary: "#4F46E5" },
+        elements: {
+          formButtonPrimary: "bg-primary hover:bg-primary/90",
+          card: "bg-background shadow-none",
+        },
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <body className={`${inter.className} min-h-screen bg-background antialiased`}>
           <div className="relative flex min-h-screen flex-col">
