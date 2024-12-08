@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/app/auth"
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -21,8 +21,8 @@ const PLANS = {
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -39,12 +39,12 @@ export async function POST(req: Request) {
     }
 
     // Create Stripe checkout session
-    const session = await stripe.checkout.sessions.create({
+    const checkoutSession = await stripe.checkout.sessions.create({
       success_url: successUrl,
       cancel_url: cancelUrl,
       mode: "subscription",
       billing_address_collection: "auto",
-      customer_email: userId, // We'll use userId as customer email for now
+      customer_email: session.user.email!, // Use user's email from session
       line_items: [
         {
           price: planConfig.price,
@@ -52,13 +52,13 @@ export async function POST(req: Request) {
         },
       ],
       metadata: {
-        userId,
+        userId: session.user.id,
         plan,
         credits: planConfig.credits.toString(),
       },
     });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: checkoutSession.url });
   } catch (error) {
     console.error("[STRIPE_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });

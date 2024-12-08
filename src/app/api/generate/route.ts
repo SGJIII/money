@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/app/auth"
 import { OpenAI } from "openai";
 import { NextResponse } from "next/server";
 
@@ -8,8 +8,8 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 

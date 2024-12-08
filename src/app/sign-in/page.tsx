@@ -1,40 +1,31 @@
-import { SignIn } from "@clerk/nextjs";
-import { Metadata } from "next";
+import { auth, signIn } from "@/app/auth"
+import { Button } from "@/components/ui/button"
+import { redirect } from "next/navigation"
 
-export const metadata: Metadata = {
-  title: "Sign In - QuickWrite",
-  description: "Sign in to your QuickWrite account",
-};
+export default async function SignInPage() {
+  const session = await auth()
+  if (session?.user) {
+    redirect("/dashboard")
+  }
 
-export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-[440px]">
-        <SignIn
-          appearance={{
-            elements: {
-              rootBox: "w-full",
-              card: "bg-background shadow-none",
-              formButtonPrimary: "bg-primary hover:bg-primary/90",
-              socialButtonsIconButton: "hover:bg-primary/90",
-              footerActionLink: "hover:text-primary",
-              oauthButtonsIconButton: "hover:bg-primary/90",
-            },
-            layout: {
-              socialButtonsPlacement: "top",
-              socialButtonsVariant: "iconButton",
-              privacyPageUrl: "/privacy",
-              termsPageUrl: "/terms",
-              shimmer: true,
-            },
-          }}
-          path="/sign-in"
-          routing="path"
-          signUpUrl="/sign-up"
-          redirectUrl="/dashboard"
-          afterSignInUrl="/dashboard"
-        />
+      <div className="w-full max-w-[440px] p-6">
+        <div className="rounded-lg border bg-card p-8">
+          <h1 className="mb-6 text-2xl font-semibold">Sign In</h1>
+          
+          <form
+            action={async () => {
+              "use server"
+              await signIn("google", { redirectTo: "/dashboard" })
+            }}
+          >
+            <Button className="w-full" type="submit">
+              Continue with Google
+            </Button>
+          </form>
+        </div>
       </div>
     </div>
-  );
+  )
 } 

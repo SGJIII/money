@@ -1,35 +1,21 @@
-import { authMiddleware } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+import { auth } from "@/app/auth"
 
-export default authMiddleware({
-  publicRoutes: [
-    "/",
-    "/sign-in(.*)",
-    "/sign-up(.*)",
-    "/pricing",
-    "/api/webhook/stripe",
-    "/api/webhook/clerk",
-    "/blog",
-    "/about",
-    "/contact",
-    "/terms",
-    "/privacy",
-  ],
-  ignoredRoutes: [
-    "/api/webhook/stripe",
-    "/api/webhook/clerk",
-    "/_next(.*)",
-    "/favicon.ico",
-    "/api/trpc(.*)",
-  ],
-  debug: true,
-  beforeAuth: (req) => {
-    return NextResponse.next();
+export async function middleware(request: NextRequest) {
+  const session = await auth()
+
+  if (!session) {
+    return NextResponse.redirect(new URL('/sign-in', request.url))
   }
-});
 
+  return NextResponse.next()
+}
+
+// Run middleware on dashboard and api routes except auth
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ],
-};
+    '/dashboard/:path*',
+    '/api/((?!auth).*)/:path*'
+  ]
+}
